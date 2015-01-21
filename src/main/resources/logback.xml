@@ -1,0 +1,26 @@
+<configuration scan="true" scanPeriod="1 minute">
+
+    <property name="APP_NAME" value="npwt" />
+    <property name="LOGS_HOME" value="${catalina.logs:-${catalina.base}/logs}" />
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS_HOME}/${APP_NAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS_HOME}/${APP_NAME}.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.tdc.mobility" level="DEBUG" />
+    <logger name="com.tdc.ims.scale" level="DEBUG" />
+    <logger name="com.tdc.commerce" level="DEBUG" />
+    <logger name="com.tdc.tcc" level="DEBUG" />
+    <logger name="com.tdc.nms.monitor.databurst" level="INFO" />
+
+    <root level="WARN">
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>
